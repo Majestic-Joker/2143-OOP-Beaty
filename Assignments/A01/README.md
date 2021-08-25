@@ -7,12 +7,9 @@ Initial folder in the assignments folder to prove that I completed the tasks out
 
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
-|   1   | Slack.PNG       | Screen snippet showing access to the 2143-oop slack channel and photo on slack profile. |
-|   2   | Roster.PNG      | Screen snippet showing completion of fields related to myself on google roster. |
+|   1   | [Slack.PNG](https://github.com/Majestic-Joker/2143-OOP-Beaty/blob/main/Assignments/A01/Slack.PNG)       | Screen snippet showing access to the 2143-oop slack channel and photo on slack profile. |
+|   2   | [Roster.PNG](https://github.com/Majestic-Joker/2143-OOP-Beaty/blob/main/Assignments/A01/Roster.PNG)      | Screen snippet showing completion of fields related to myself on google roster. |
 
 ### Instructions
 
-- view each image if desired
-
-- Example Command:
-    N/A
+- View each image if desired
