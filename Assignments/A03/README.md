@@ -7,7 +7,7 @@ Assignment folder to prove completion of [Assignment 3](https://github.com/rugby
 
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
-|   1   | [banner.txt](https://github.com/Majestic-Joker/2143-OOP-Beaty)       | This is the banner I chose |
+|   1   | [banner.txt](https://github.com/Majestic-Joker/2143-OOP-Beaty/blob/main/Assignments/A03/banner.txt)       | This is the banner I chose |
 
 
 ### Instructions
