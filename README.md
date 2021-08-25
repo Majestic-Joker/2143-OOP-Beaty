@@ -5,4 +5,4 @@
 #### Image:
 ![Joshua Beaty](https://i.imgur.com/IvmZdVC.jpg)
 #### Avatar:
-![Avatar](https://i.imgur.com/wr1oEvR.jpg)
+![Avatar](https://i.imgur.com/wr1oEvRs.jpg)
