@@ -178,7 +178,7 @@ public:
  * Public : &operator<<
  * 
  * Description:
- *      prints entire contents of queue from front to back to the command line
+ *      Overloads the << operator to allow the queue to print entire contents from front to back to the command line
  * 
  * Params:
  *      ostream             : &os references outstream component used to output to terminal
