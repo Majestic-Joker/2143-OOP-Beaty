@@ -119,6 +119,19 @@ class MyVector{
             tail = NULL;
             size = 0;
         }
+        /**
+        * Public : MyVector
+        * 
+        * Description:
+        *      This constructor takes an array of ints and creates enough nodes to hold the data
+        * 
+        * Params:
+        *       int*    A
+        *       int     sz
+        * 
+        * Returns:
+        *      none
+        */
         MyVector(int* A, int sz){
             head = NULL;
             tail = NULL;
@@ -296,6 +309,8 @@ class MyVector{
 
 int main(){
 int x = 0;
+ofstream mainOut;
+mainOut.open("test.out", std::ios_base::app);
 
 MyVector v1;
 v1.pushFront(18);
@@ -328,6 +343,7 @@ x = v1.popFront();
 v1.print();
 // [18, 20, 25, 9, 11, 25, 27, 33, 47, 51, 63]
 cout<<x<<endl;
+mainOut<<x<<endl;
 // 18
 
 x = v1.popRear();
@@ -336,20 +352,24 @@ x = v1.popRear();
 v1.print();
 // [18, 20, 25, 9, 11, 25, 27, 33]
 cout<<x<<endl;
+mainOut<<x<<endl;
 // 47
 
 x = v2.popAt(3);
 v2.print();
 // [9, 11, 25, 33, 47, 51, 63]
 cout<<x<<endl;
+mainOut<<x<<endl;
 // 27
 
 x = v2.find(51);
 cout<<x<<endl;
+mainOut<<x<<endl;
 // 5
 
 x = v2.find(99);
 cout<<x<<endl;
+mainOut<<x<<endl;
 // -1
 
 MyVector v3(v1);
@@ -364,5 +384,6 @@ MyVector v4("input.dat");
 v4.pushRear(v3);
 v4.print();
 // [56, 61, 97, 66, 83, 25, 26, 11, 53, 49, 62, 18, 10, 18, 14, 3, 4, 23, 18, 24, 26, 27, 54, 14, 12, 45, 65, 98, 56, 97, 15, 84, 98, 9, 11, 25, 33, 47, 51, 63, 18, 20, 25, 9, 11, 25, 27, 33]
+mainOut.close();
 return 0;
 }
