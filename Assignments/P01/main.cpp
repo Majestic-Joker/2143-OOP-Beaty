@@ -46,23 +46,53 @@ struct Node{
  * MyVector
  * 
  * Description:
- *      Description of your class and what it does
+ *      MyVector class basically mimics the built in Vector class but it only works with ints
  * 
  * Public Methods:
- *      - A list of 
- *      - each public method
- *      - with return types
+ *      - MyVector()                            // Default constructor, initializes head and tail to NULL, and size to 0
+ *      - MyVector(int* A, int sz)              // Constructs a MyVector and fills it with ints from Array A
+ *      - MyVector(string FileName)             // Contructs a MyVector with ints from a file
+ *      - MyVector(const MyVector &other)       // Copy constructor
+ *      - void pushFront(int val)               // Creates a new node at front with data = val
+ *      - void pushFront(const MyVector &V2)    // Creates enough new nodes at front of MyVector to hold data from V2
+ *      - void pushRear(int val)                // Creates a new node at end with data = val
+ *      - void pushRear(const MyVector &V2)     // Creates enough nodes at end of MyVector to hold data from V2
+ *      - void pushAt(int loc, int val)         // Creates a new node at loc with data = val
+ *      - void inOrderPush(int val)             // Traverses to node at position loc and overrides data with val
+ *      - int popFront()                        // Returns the data from head and deletes head node
+ *      - int popRear()                         // Returns the data from the tail and deletes tail node
+ *      - int popAt(int loc)                    // Returns the data from the node at loc and deletes that node
+ *      - int find(int val)                     // Returns the location of val from head
+ *      - void print()                          // Prints entire contents of MyVector to console and test.out
  * 
  * Private Methods:
  *      - None
  * 
  * Usage: 
- * 
- *      - examples of how
- *      - to use your class 
+ *      MyVector V1();
+ *      int arr[] = {11,25,33,47,51};
+ *      MyVector V2(arr, 5);
+ *      MyVector V3("input.dat");
  *      
+ * 
+ *      V1.pushFront(5);
+ *      V1.pushFront(6);
+ *      V1.pushFront(132);
+ *      V1.pushFront(45);
+ *      V1.print();
+ *      MyVector V4(V1);
+ *      
+ *      cout << V2.popRear();
+ *      V2.print();
+ *      V3.print();
+ *      V4.print();
+ *      V4.pushRear(V2);
+ *      V3.pushFront(V1);
+ * 
+ *      V1.pushAt(2,4);
  */
 
+//easiest and worst way to only print header on test.out once
 bool firstPrint = true;
 class MyVector{
     private:
@@ -72,6 +102,18 @@ class MyVector{
         Node* head;
         Node* tail;
         int size;
+        /**
+        * Public : MyVector
+        * 
+        * Description:
+        *      Default constructor, initializes stuff to NULL and 0
+        * 
+        * Params:
+        *      none
+        * 
+        * Returns:
+        *      none
+        */
         MyVector(){
             head = NULL;
             tail = NULL;
@@ -148,7 +190,12 @@ class MyVector{
                 trav = trav->next;
             } 
         }
-    
+        void pushAt(int loc, int val){
+            Node* trav = head;
+            for(int i = 0; i < loc; i++)
+                trav = trav->next;
+            trav->data = val;
+        }
         void inOrderPush(int val){
             Node* newNode = new Node();
             newNode->data = val;
