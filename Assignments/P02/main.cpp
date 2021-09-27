@@ -2,8 +2,8 @@
 *                    
 *  Author:           Joshua Beaty
 *  Email:            joshua.a.beaty@gmail.com
-*  Label:            P01
-*  Title:            MyVector Class
+*  Label:            P02
+*  Title:            MyVector Class 2
 *  Course:           CMPS 2143
 *  Semester:         Fall 2021
 * 
