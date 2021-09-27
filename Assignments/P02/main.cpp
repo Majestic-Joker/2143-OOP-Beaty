@@ -27,6 +27,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -38,6 +39,23 @@ struct Node{
         data = 0;
         next = NULL;
         prev = NULL;
+    }
+    //friends and overloads << operator to print Node data to the console
+    friend ostream& operator<<(ostream& os, const Node& rhs) {
+            os << rhs.data;
+        return os;
+    }
+
+    //friends and overloads << operator to print Node data to the file
+    friend ofstream& operator<<(ofstream& ofs, const Node& rhs) {
+            ofs << rhs.data;
+        return ofs;
+    }
+
+    //overloads equal sign operator to overwrite Node data with the given value
+    Node& operator=(const int value) {
+            data = value;
+        return *this;
     }
 };
 
@@ -332,25 +350,288 @@ class MyVector{
             }
             return ofs;
         }
-        //overloads square brackets to return value at specified index.
-        int operator[](int index) {
-            Node* trav;
 
-            if(index < (size/2)){
-                trav = head;
-                for(int i = 0; i < index; i++){
-                    trav = trav->next;
+        //overloads square brackets to return a reference to the node at the given index
+        Node& operator[](int index) {
+            Node* trav;
+            trav = head;
+            for(int i = 0; i < index; i++){
+                trav = trav->next;
+            }
+            return *trav;
+        }
+
+        //overloads plus sign to add the data of two nodes every index of a MyVector
+        friend MyVector operator+(const MyVector& lhs, const MyVector& rhs){
+            //create a temporary MyVector to be returned.
+            MyVector temp;
+            //if left side is greater than right side. Loop a number of times equal to the larger side. 
+            if(lhs.size >= rhs.size){
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempL(lhs);
+                //for every node in the larger list
+                for(int i = 0; i<lhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travL = tempL.head;
+                    Node* travR = rhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travL = travL->next;
+                        //avoiding seg faults
+                        if(travR->next)
+                            travR = travR->next;
+                        count--;
+                    }
+                    //skip rhs if i is larger than its size
+                    if(rhs.size >= i)
+                        travL->data = travL->data+travR->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempL);
+            }
+            else{
+                
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempR(rhs);
+                //for every node in the larger list
+                for(int i = 0; i<rhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travR = tempR.head;
+                    Node* travL = lhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travR = travR->next;
+                        //avoiding seg faults
+                        if(travL->next)
+                            travL = travL->next;
+                        count--;
+                    }
+                    //skip lhs if i is larger than its size
+                    if(lhs.size >= i)
+                        travR->data = travR->data+travL->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempR);
+            }
+
+            return temp;
+        }
+
+        friend MyVector operator-(const MyVector& lhs, const MyVector& rhs){
+            //create a temporary MyVector to be returned.
+            MyVector temp;
+            //if left side is greater than right side. Loop a number of times equal to the larger side. 
+            if(lhs.size >= rhs.size){
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempL(lhs);
+                //for every node in the larger list
+                for(int i = 0; i<lhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travL = tempL.head;
+                    Node* travR = rhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travL = travL->next;
+                        //avoiding seg faults
+                        if(travR->next)
+                            travR = travR->next;
+                        count--;
+                    }
+                    //skip rhs if i is larger than its size
+                    if(rhs.size >= i)
+                        travL->data = travL->data-travR->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempL);
+            }
+            else{
+                
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempR(rhs);
+                //for every node in the larger list
+                for(int i = 0; i<rhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travR = tempR.head;
+                    Node* travL = lhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travR = travR->next;
+                        //avoiding seg faults
+                        if(travL->next)
+                            travL = travL->next;
+                        count--;
+                    }
+                    //skip lhs if i is larger than its size
+                    if(lhs.size >= i)
+                        travR->data = travR->data-travL->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempR);
+            }
+
+            return temp;
+        }
+
+        friend MyVector operator*(const MyVector& lhs, const MyVector& rhs){
+            //create a temporary MyVector to be returned.
+            MyVector temp;
+            //if left side is greater than right side. Loop a number of times equal to the larger side. 
+            if(lhs.size >= rhs.size){
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempL(lhs);
+                //for every node in the larger list
+                for(int i = 0; i<lhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travL = tempL.head;
+                    Node* travR = rhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travL = travL->next;
+                        //avoiding seg faults
+                        if(travR->next)
+                            travR = travR->next;
+                        count--;
+                    }
+                    //skip rhs if i is larger than its size
+                    if(rhs.size >= i)
+                        travL->data = travL->data*travR->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempL);
+            }
+            else{
+                
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempR(rhs);
+                //for every node in the larger list
+                for(int i = 0; i<rhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travR = tempR.head;
+                    Node* travL = lhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travR = travR->next;
+                        //avoiding seg faults
+                        if(travL->next)
+                            travL = travL->next;
+                        count--;
+                    }
+                    //skip lhs if i is larger than its size
+                    if(lhs.size >= i)
+                        travR->data = travR->data*travL->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempR);
+            }
+
+            return temp;
+        }
+
+        friend MyVector operator/(const MyVector& lhs, const MyVector& rhs){
+            //create a temporary MyVector to be returned.
+            MyVector temp;
+            //if left side is greater than right side. Loop a number of times equal to the larger side. 
+            if(lhs.size >= rhs.size){
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempL(lhs);
+                //for every node in the larger list
+                for(int i = 0; i<lhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travL = tempL.head;
+                    Node* travR = rhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travL = travL->next;
+                        //avoiding seg faults
+                        if(travR->next)
+                            travR = travR->next;
+                        count--;
+                    }
+                    //skip rhs if i is larger than its size
+                    if(rhs.size >= i)
+                        travL->data = travL->data/travR->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempL);
+            }
+            else{
+                
+                //create a temp MyVector to hold the new stuff.
+                MyVector tempR(rhs);
+                //for every node in the larger list
+                for(int i = 0; i<rhs.size; i++){
+                    //create traveling nodes for each list
+                    Node* travR = tempR.head;
+                    Node* travL = lhs.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        
+                        travR = travR->next;
+                        //avoiding seg faults
+                        if(travL->next)
+                            travL = travL->next;
+                        count--;
+                    }
+                    //skip lhs if i is larger than its size
+                    if(lhs.size >= i)
+                        travR->data = travR->data/travL->data;
+                }
+                //create a temp MyVector to return the result.
+                temp.pushRear(tempR);
+            }
+
+            return temp;
+        }
+
+        bool operator==(const MyVector& other){
+            //create a variable to return.
+            bool temp = true;
+            //if left side is greater than right side. Loop a number of times equal to the larger side. 
+            if(size == other.size){
+                //check each node's data to make sure it's the same as eachother
+                for(int i = 0; i < size; i++){
+                    //create traveling nodes for each list
+                    Node* travL = head;
+                    Node* travR = other.head;
+                    int count = i;
+                    //travel down each list
+                    while(count>0){
+                        travR = travR->next;
+                        travL = travL->next;
+                        count--;
+                    }
+                    if(travL->data != travR->data){
+                        temp = false;
+                        break;
+                    }
                 }
             }
             else{
-                trav = tail;
-                for(int i = 0; i < (size-index); i++){
-                    trav = trav->prev;
-                }
+                //no way to be equal
+                temp = false;
             }
 
-            int temp = trav->data;
-            delete trav;
+            return temp;
+        }
+
+        MyVector operator=(const MyVector& other){
+            //create a temporary MyVector to be returned.
+            MyVector temp(other);
             return temp;
         }
 };
@@ -378,7 +659,7 @@ cout << v1 << endl;
 fout << v1 << endl;
 // writes out [1,2,3,4,9] to your output file.
 
-Vector v3 = v1 + v2;
+MyVector v3 = v1 + v2;
 cout << v3 << endl;
 // writes out [11,22,33,4,9] to console.
 
